@@ -15,7 +15,10 @@ int main(){
     cal.addEvent(event1) ; 
     cal.addEvent(event2) ;
     cal.addEvent(event3) ; 
- 
+    
+    cal.refresh(event1) ; 
+    cal.refresh(event2) ;  
+    cal.refresh(event3) ; 
  
 
 
