@@ -21,7 +21,23 @@ bool Calender::conflicts(const Event & a, const Event & b){
         }   
     return false ; 
 }
+void Calender::refresh(const Event & event){
+    Event tempEvent = event ; 
+    time_t now = time(0) ; 
+    tm*ltm = localtime(&now) ; 
 
+    int currentYear = 1900 + ltm->tm_year ; 
+    int currentMonth = 1 + ltm->tm_mon ; 
+    int currentDay = ltm->tm_mday ;
+    if (event.year < currentYear || (event.year == currentYear && event.month < currentMonth) || 
+        (event.year == currentYear && event.month == currentMonth && event.day < currentDay)) {
+            cout << "the event " << tempEvent.name << " has been expired" << endl ; 
+            tempEvent.setDeleted() ; 
+            //deleted_events.push_back(tempEvent) ; 
+        }else{
+            cout << "the event " << tempEvent.name << " is still on" << endl ; 
+        }
+    }
 void Calender:: addEvent(const Event & event){
     Event tempEvent = event  ;
     for(const auto & e : events){
