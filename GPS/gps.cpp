@@ -18,3 +18,16 @@ Gps::Gps( string& name, int latitude ,int longitude): name(name) ,latitude(latit
         myfile.close();
 }
 
+Gps::~Gps(){
+    fstream myfile("locations.txt", ios::in);
+        string lastLine, line;
+        while (getline(myfile, line)) {
+            if (!line.empty())
+                lastLine = line;
+        }
+        myfile.close();
+        cout << "Last added position: " << lastLine << endl;
+}
+
+
+
