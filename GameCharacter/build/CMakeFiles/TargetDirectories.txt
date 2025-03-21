@@ -1,0 +1,3 @@
+C:/Users/sibegilan/Desktop/HW2/gamecharacter/build/CMakeFiles/gamecharacter.dir
+C:/Users/sibegilan/Desktop/HW2/gamecharacter/build/CMakeFiles/edit_cache.dir
+C:/Users/sibegilan/Desktop/HW2/gamecharacter/build/CMakeFiles/rebuild_cache.dir
