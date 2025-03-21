@@ -24,6 +24,29 @@ void Character::showCharacters()const{
     }
 }
 
+void Character::update(const string& attribute, int value){
+    if (attribute == "health"){
+        if(value>0){
+            health = value;
+            cout << name << "'s health updated to: " << health << "\n";            
+        }else
+            cout << "health can not ben under 0 !" << endl ;
+       
+    }
+    else{
+        cout << "Invalid attribute: " << attribute << "\n";
+    }
+}
+
+void Character::update(const string& attribute, const string & value){
+    if (attribute == "power"){
+        power = value;
+        cout << name << "'s power updated to: " << power << "\n";
+    }
+}
+
+
+
 string Character::getName()const{
     return name ; 
 }
