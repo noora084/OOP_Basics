@@ -13,5 +13,8 @@ int main(){
     game.addCharacters(warrior);
     game.addCharacters(roya);
 
+    game.updateCharacter("warrior" , "power" , "magic") ; 
+	game.updateCharacter("warrior" , "health" , -1) ; 
+
     game.displayCharacters();
 }
