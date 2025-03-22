@@ -7,18 +7,24 @@
 using namespace std ;
 
 bool Calender::conflicts(const Event & a, const Event & b){
-    if(a.name == b.name){
-        cout << "warning! adding two events with one name: " << a.name << endl ;
-        return true; 
-    }
-    if(a.year < 0 || b.year < 0 || a.month < 1 || b.month < 1 || a.month > 12 || b.month > 12 
-        || a.day<1 || a.day > 30 || b.day < 1 || b.day > 30)
+
+    if(a.start.year < 2025 || b.start.year < 2025 || a.start.month < 1 || b.start.month < 1 || a.start.month > 12 || b.start.month > 12 
+        || a.start.day < 1 || b.start.day > 30 || b.start.day < 1 || b.start.day > 30){
         return true ; 
 
-        if (a.year == b.year && a.month == b.month && a.day == b.day) {
-            cout << "Conflict detected! Events overlap on the same day: " << a.name << " and " << b.name << endl;
+        }
+        if(a.end.year < 2025 || b.end.year < 2025 || a.end.month < 1 || b.end.month < 1 || a.end.month > 12 || b.end.month > 12 
+            || a.end.day < 1 || b.end.day > 30 || b.end.day < 1 || b.end.day > 30)
+            return true ;
+
+        if (a.start.year == a.end.year && a.start.month == a.end.month && a.start.day == a.end.day){
+            cout << "Conflict detected! Events overlap on the same day: " << a.name <<  endl;
             return true;
-        }   
+        }
+        if (b.start.year == b.end.year && b.start.month == b.end.month && b.start.day == b.end.day){
+            cout << "Conflict detected! Events overlap on the same day: " << b.name <<  endl;
+            return true;
+        }      
     return false ; 
 }
 void Calender::refresh(const Event & event){
@@ -29,22 +35,25 @@ void Calender::refresh(const Event & event){
     int currentYear = 1900 + ltm->tm_year ; 
     int currentMonth = 1 + ltm->tm_mon ; 
     int currentDay = ltm->tm_mday ;
-    if (event.year < currentYear || (event.year == currentYear && event.month < currentMonth) || 
-        (event.year == currentYear && event.month == currentMonth && event.day < currentDay)) {
+
+    if(event.start.year < currentYear){ //deleted because of the wrong validation for month and day
             cout << "the event " << tempEvent.name << " has been expired" << endl ; 
             tempEvent.setDeleted() ; 
-            //deleted_events.push_back(tempEvent) ; 
-        }else{
-            cout << "the event " << tempEvent.name << " is still on" << endl ; 
+        }else if(event.end.year < currentYear){
+            cout << "the event " << tempEvent.name << " has been expired" << endl ; 
+            tempEvent.setDeleted() ;
         }
-    }
+        else{    
+            cout << "the event " << tempEvent.name << " is still on" << endl ;     
+        }
+}
+
 void Calender:: addEvent(const Event & event){
     Event tempEvent = event  ;
     for(const auto & e : events){
         if(conflicts(e , tempEvent)){
             cout << "event not added: " << tempEvent.name << endl ;
             tempEvent.setDeleted() ;  
-            //deleted_events.push_back(tempEvent) ;
             return ;  
         }
     }
