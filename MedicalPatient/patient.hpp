@@ -16,6 +16,7 @@ class Patient{
 
     public:
         Patient(std::string name , float age , float body_temperature ,int heart_rate , int respiratory_rate , int blood_pressure) ;
+        bool validateRespiratoryRate(float age, int rate) ;
         ~Patient() ;
         void encrypt();
         void decrypt() ; 
