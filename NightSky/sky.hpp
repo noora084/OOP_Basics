@@ -6,10 +6,11 @@
 
 class Sky{
     private:
-        std::vector<Star> stars ; 
     public:
+        std::vector<Star> stars ; 
         void addStars(Star star) ; 
-        void displaysky() const ; 
+        void displaysky() ; 
+        void render() ; 
 
 };
 #endif
